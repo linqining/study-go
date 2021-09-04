@@ -4,4 +4,6 @@ import "testing"
 
 func TestClosure(t *testing.T) {
 	Closure()
+	ClosureFix1()
+	ClosureFix2()
 }

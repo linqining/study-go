@@ -8,3 +8,20 @@ func Closure() {
 		defer func(){ println(i) } ()
 	}
 }
+
+
+
+func ClosureFix1() {
+	for i := 0; i < 3; i++ {
+		i := i // 定义一个循环体内局部变量i
+		defer func(){ println(i) } ()
+	}
+}
+
+func ClosureFix2() {
+	for i := 0; i < 3; i++ {
+		// 通过函数传入i
+		// defer 语句会马上对调用参数求值
+		defer func(i int){ println(i) } (i)
+	}
+}
