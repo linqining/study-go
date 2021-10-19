@@ -200,3 +200,28 @@ func Pivot(head *Node,pivot int) *Node{
 	pivNode.next = nil
 	return begin
 }
+
+// 删除无序节点单链表重复出现的节点
+func RemoveDuplicate(head *Node)*Node{
+	if head ==nil{
+		return head
+	}
+	begin := head
+	valMap := make(map[int]bool)
+	var prev *Node
+	for head!=nil{
+		_,ok:=valMap[head.value]
+		// 存在重复的值
+		if ok{
+			// 第一次进来一定是走下面，因此prev一定不是nil
+			prev.next = head.next
+			head.next=nil
+			head = prev.next
+		}else{
+			valMap[head.value] = true
+			prev = head
+			head = head.next
+		}
+	}
+	return begin
+}

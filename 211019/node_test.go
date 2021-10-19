@@ -108,3 +108,10 @@ func TestPivot(t *testing.T) {
 	newNode = Pivot(node,3)
 	fmt.Print(newNode.String())
 }
+
+
+func TestRemoveDuplicate(t *testing.T) {
+	node := NewLinkList([]int{1,2,3,3,4,4,2,1,1})
+	node2 := RemoveDuplicate(node)
+	fmt.Print(node2.String())
+}
