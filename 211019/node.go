@@ -27,3 +27,15 @@ func RemoveMiddleNode(head *Node) *Node {
 	pre.next = pre.next.next
 	return head
 }
+
+// 翻转链表
+func Reverse(head *Node) *Node{
+	if head ==nil || head.next==nil{
+		return head
+	}
+	cur := head
+	tmp := head.next
+	node := Reverse(head.next)
+	tmp.next = cur
+	return node
+}
