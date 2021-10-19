@@ -66,3 +66,15 @@ func ReverseNoRecur(head *Node) *Node{
 		return tmp
 	}
 }
+
+// 反转链表，非递归方式
+func ReverseNoRecur2(head *Node) *Node{
+	var pre,next *Node
+	for head!=nil{
+		next = head.next
+		head.next = pre
+		pre=head
+		head = next
+	}
+	return pre
+}
