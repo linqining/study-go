@@ -1,6 +1,9 @@
 package _11019
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestRemoveMiddleNode(t *testing.T) {
 	node1 := Node{value: 1}
@@ -57,6 +60,8 @@ func TestIsPalindrome(t *testing.T){
 	if result == true{
 		t.Fatal("应该为false")
 	}
+	fmt.Println(node4.String())
+
 
 	node1 = Node{value: 1}
 	node2 = Node{value: 2,next: &node1}
@@ -66,6 +71,7 @@ func TestIsPalindrome(t *testing.T){
 	if result ==false{
 		t.Fatal("应该为true")
 	}
+	fmt.Println(node4.String())
 
 	node1 = Node{value: 1}
 	node2 = Node{value: 2,next: &node1}
@@ -74,6 +80,7 @@ func TestIsPalindrome(t *testing.T){
 	if result ==true{
 		t.Fatal("应该为false")
 	}
+	fmt.Println(node3.String())
 
 	node1 = Node{value: 1}
 	node2 = Node{value: 2,next: &node1}
@@ -82,6 +89,8 @@ func TestIsPalindrome(t *testing.T){
 	if result ==false{
 		t.Fatal("应该为true")
 	}
+	fmt.Println(node3.String())
+
 }
 
 

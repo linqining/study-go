@@ -1,8 +1,25 @@
 package _11019
 
+import (
+	"strconv"
+	"strings"
+)
+
 type Node struct{
 	value int
 	next *Node
+}
+
+func (n *Node) String()string{
+	sb :=strings.Builder{}
+	for n!=nil{
+		sb.WriteString(strconv.Itoa(n.value))
+		n = n.next
+		if n!=nil{
+			sb.WriteString("->")
+		}
+	}
+	return sb.String()
 }
 
 func RemoveMiddleNode(head *Node) *Node {
@@ -80,7 +97,8 @@ func ReverseNoRecur2(head *Node) *Node{
 }
 
 // 判断是否回文链表
-func IsPalindrome(head *Node)bool{
+func IsPalindrome(head *Node) (isPalindrome bool){
+	isPalindrome = true
 	if head ==nil {
 		return false
 	}
@@ -112,12 +130,19 @@ func IsPalindrome(head *Node)bool{
 		lf = pre
 		rf = cur
 	}
+
+	var revCur *Node
+	revCur = cur
 	for i:=0;i<move;i++{
-		if lf.value != rf.value{
-			return false
+		if lf.value != rf.value && isPalindrome{
+			isPalindrome = false
 		}
+		// 优化，判断后不改变原来的结构，将链表反转回来
+		tmp := lf
 		lf = lf.next
+		tmp.next=revCur
+		revCur = tmp
 		rf = rf.next
 	}
-	return true
+	return
 }
