@@ -48,3 +48,40 @@ func TestReverseNoRecur2(t *testing.T){
 }
 
 
+func TestIsPalindrome(t *testing.T){
+	node1 := Node{value: 1}
+	node2 := Node{value: 2,next: &node1}
+	node3 := Node{value: 3,next: &node2}
+	node4 := Node{value: 4,next: &node3}
+	result := IsPalindrome(&node4)
+	if result == true{
+		t.Fatal("应该为false")
+	}
+
+	node1 = Node{value: 1}
+	node2 = Node{value: 2,next: &node1}
+	node3 = Node{value: 2,next: &node2}
+	node4 = Node{value: 1,next: &node3}
+	result = IsPalindrome(&node4)
+	if result ==false{
+		t.Fatal("应该为true")
+	}
+
+	node1 = Node{value: 1}
+	node2 = Node{value: 2,next: &node1}
+	node3 = Node{value: 3,next: &node2}
+	result = IsPalindrome(&node3)
+	if result ==true{
+		t.Fatal("应该为false")
+	}
+
+	node1 = Node{value: 1}
+	node2 = Node{value: 2,next: &node1}
+	node3 = Node{value: 1,next: &node2}
+	result = IsPalindrome(&node3)
+	if result ==false{
+		t.Fatal("应该为true")
+	}
+}
+
+

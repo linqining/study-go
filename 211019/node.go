@@ -78,3 +78,46 @@ func ReverseNoRecur2(head *Node) *Node{
 	}
 	return pre
 }
+
+// 判断是否回文链表
+func IsPalindrome(head *Node)bool{
+	if head ==nil {
+		return false
+	}
+	begin := head
+	nCount :=0
+	for begin!=nil{
+		nCount++
+		begin = begin.next
+	}
+	if nCount == 1{
+		return true
+	}
+	move := nCount/2
+
+	var pre, cur,next,lf,rf *Node
+	cur = head
+	for i:=0;i<move;i++{
+		next = cur.next
+		cur.next=pre
+		pre = cur
+		cur = next
+	}
+	if nCount&1 ==1{
+		// 奇数
+		lf = pre
+		rf = cur.next
+	}else{
+		// 偶数
+		lf = pre
+		rf = cur
+	}
+	for i:=0;i<move;i++{
+		if lf.value != rf.value{
+			return false
+		}
+		lf = lf.next
+		rf = rf.next
+	}
+	return true
+}
