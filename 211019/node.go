@@ -22,6 +22,19 @@ func (n *Node) String()string{
 	return sb.String()
 }
 
+func NewLinkList(ints []int)*Node{
+	tmpNode := &Node{}
+	head := tmpNode
+	for _, item :=range ints{
+		node := &Node{value: item}
+		head.next = node
+		head = head.next
+	}
+	rNode := tmpNode.next
+	tmpNode.next=nil
+	return rNode
+}
+
 func RemoveMiddleNode(head *Node) *Node {
 	if head ==nil || head.next ==nil{
 		return head;
@@ -145,4 +158,45 @@ func IsPalindrome(head *Node) (isPalindrome bool){
 		rf = rf.next
 	}
 	return
+}
+
+func Pivot(head *Node,pivot int) *Node{
+	if head == nil{
+		return head
+	}
+	begin := head
+
+	pivNode := &Node{value: pivot}
+	var prev,next,headPev *Node // prev相对于pivNode的前后节点,next 相对于head的pev
+
+
+	for head!=nil{
+		if head.value<=pivNode.value{
+			if prev==nil{
+				prev = head
+				begin = prev
+			}else{
+				prev.next = head
+				prev = head
+			}
+			next=head.next
+			prev.next=pivNode
+			if headPev!=nil{
+				headPev.next=next
+			}
+			head = next
+		}else{
+			headPev = head
+			if pivNode.next==nil{
+				pivNode.next = head
+			}
+			head = head.next
+		}
+	}
+	// 断开pivotNode 链接
+	if prev!=nil{
+		prev.next=pivNode.next
+	}
+	pivNode.next = nil
+	return begin
 }

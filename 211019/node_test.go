@@ -94,3 +94,17 @@ func TestIsPalindrome(t *testing.T){
 }
 
 
+func TestNewLinkList(t *testing.T) {
+	node:=NewLinkList([]int{2,5,4,5})
+	fmt.Print(node.String())
+}
+
+func TestPivot(t *testing.T) {
+	node := NewLinkList([]int{9,0,4,5,1})
+	newNode := Pivot(node,3)
+	fmt.Print(newNode.String())
+
+	node= NewLinkList([]int{0,1,9,3,5})
+	newNode = Pivot(node,3)
+	fmt.Print(newNode.String())
+}
