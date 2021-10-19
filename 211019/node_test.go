@@ -115,3 +115,9 @@ func TestRemoveDuplicate(t *testing.T) {
 	node2 := RemoveDuplicate(node)
 	fmt.Print(node2.String())
 }
+
+func TestSelectionSort(t *testing.T) {
+	node := NewLinkList([]int{1,12,3,4,4,9,2,56,71})
+	node2,_ := SelectionSort(node)
+	fmt.Print(node2.String())
+}

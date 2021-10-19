@@ -225,3 +225,52 @@ func RemoveDuplicate(head *Node)*Node{
 	}
 	return begin
 }
+
+func SelectionSort(n *Node)(bNode *Node,eNode *Node){
+	if n==nil{
+		return nil,nil
+	}
+	if n.next==nil{
+		return n,n
+	}
+
+	prev := &Node{value: 0,next: n} //虚拟节点
+	start := prev
+	sepNode :=n
+	last:=n
+	n = n.next
+	for n!=nil{
+		tmp := n.next
+		if n.value<= sepNode.value{
+			last.next = n.next
+			prev.next=n
+			prev.next.next = sepNode
+			prev = prev.next
+		}else{
+			last = n
+		}
+		n = tmp
+	}
+
+	lb := start.next
+	start.next =nil
+	prev.next = nil
+	var ls, le *Node
+	if lb!=nil && lb!=sepNode{
+		ls,le = SelectionSort(lb)
+		le.next = sepNode
+	}else{
+		ls = sepNode
+	}
+
+	rb := sepNode.next
+	var rs, re *Node
+	if rb!=nil{
+		sepNode.next = nil
+		rs, re = SelectionSort(rb)
+		sepNode.next=rs
+	}else{
+		re = last
+	}
+	return ls, re
+}
