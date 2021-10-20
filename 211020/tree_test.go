@@ -16,3 +16,8 @@ func TestPosOrderUnRecur(t *testing.T) {
 	node := NewTree()
 	PosOrderUnRecur(node)
 }
+
+func TestPosOrderUnRecur2(t *testing.T) {
+	node := NewTree()
+	PosOrderUnRecur2(node)
+}

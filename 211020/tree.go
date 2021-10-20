@@ -109,3 +109,27 @@ func PosOrderUnRecur(head *Node){
 	}
 	fmt.Println("")
 }
+
+func PosOrderUnRecur2(head *Node){
+	fmt.Println("pos-order2: ")
+	if head!=nil{
+		stack := algorithm.NewStack()
+		stack.Push(head)
+		var c *Node
+		for !stack.Empty(){
+			elm := stack.Top()
+			c = elm.(*Node)
+			if c.left!=nil && head != c.left && head!=c.right{
+				stack.Push(c.left)
+			}else if c.right!=nil && head!=c.right{
+				stack.Push(c.right)
+			}else{
+				elm := stack.Top()
+				stack.Pop()
+				fmt.Println(elm)
+				head = c
+			}
+		}
+	}
+	fmt.Println("")
+}
