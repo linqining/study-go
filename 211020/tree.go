@@ -59,3 +59,26 @@ func PreOrderUnRecur(head *Node){
 	}
 	fmt.Println("")
 }
+
+func InOrderUnRecur(head *Node){
+	fmt.Println("in-order: ")
+	if head!=nil{
+		stack := algorithm.NewStack()
+		for !stack.Empty()||head!=nil{
+			if head!=nil{
+				stack.Push(head)
+				head = head.left
+			}else{
+				elm := stack.Top()
+				err := stack.Pop()
+				if err!=nil{
+					fmt.Println("打印错误",err)
+				}
+				head = elm.(*Node)
+				fmt.Println(head.value)
+				head = head.right
+			}
+
+		}
+	}
+}

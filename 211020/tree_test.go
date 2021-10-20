@@ -6,3 +6,8 @@ func TestPreOrderUnRecur(t *testing.T) {
 	node := NewTree()
 	PreOrderUnRecur(node)
 }
+
+func TestInOrderUnRecur(t *testing.T) {
+	node := NewTree()
+	InOrderUnRecur(node)
+}
