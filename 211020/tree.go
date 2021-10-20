@@ -3,6 +3,7 @@ package _11020
 import (
 	"fmt"
 	"github.com/xcltapestry/xclpkg/algorithm"
+	"math"
 )
 
 type Node struct{
@@ -132,4 +133,57 @@ func PosOrderUnRecur2(head *Node){
 		}
 	}
 	fmt.Println("")
+}
+
+
+func BiggestSubBST(head *Node) *Node{
+	record :=make([]int,3)
+	return postOrder(head, record)
+}
+
+// 这里注意传入的是引用类型
+func postOrder(head *Node,record []int)*Node{
+	if head==nil{
+		record[0]=0
+		record[1] = math.MaxInt32
+		record[2] = math.MinInt32
+		return nil
+	}
+	value := head.value
+	fmt.Println(value)
+	left := head.left
+	right := head.right
+
+	lBST := postOrder(left,record)
+	lSize := record[0]
+	lMin := record[1]
+	lMax := record[2]
+	rBST := postOrder(right,record)
+	rSize := record[0]
+	rMin := record[1]
+	rMax := record[2]
+	if lMin>rMin{
+		record[1] = rMin
+	}else{
+		record[1] = lMin
+	}
+	if rMax>lMax{
+		record[2] = rMax
+	}else{
+		record[2] = lMax
+	}
+	if left == lBST && right == rBST && lMax<value && value < rMin{
+		record[0] = lSize + rSize+1
+		return head
+	}
+	if lSize>rSize{
+		record[0] =lSize
+	}else{
+		record[0] = rSize
+	}
+	if lSize>rSize{
+		return lBST
+	}else{
+		return rBST
+	}
 }
