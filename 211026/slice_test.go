@@ -25,3 +25,33 @@ func TestSlice(t *testing.T){
 	t.Log(c)
 	t.Log(d)
 }
+
+type tst1 struct{
+	a int
+	b []int
+}
+
+type tst2 struct{
+	a int
+	b int
+}
+
+// 包含引用类型的不能比较
+func TestStructCompare(t *testing.T){
+	o1 := tst1{a:0,b:[]int{1}}
+	o2 := tst1{a:0, b:[]int{1}}
+	if o1==o2{
+		t.Log("o1等于o2")
+	}else{
+		t.Log("o1不等于o2")
+	}
+
+	o3 := tst2{a:1,b:2}
+	o4 := tst2{a:1,b:2}
+
+	if o3==o4{
+		t.Log("o3等于o4")
+	}else{
+		t.Log("o3不等于o4")
+	}
+}
