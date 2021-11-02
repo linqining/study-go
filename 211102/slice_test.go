@@ -65,3 +65,15 @@ func TestGetWonPrice(t *testing.T) {
 	wonmon=GetWonPrice([]int{4,1,2})
 	t.Log(wonmon)
 }
+
+
+func TestBinarySearch(t *testing.T) {
+	idx :=BinarySearch([]int{1,3,5,7,9},3)
+	t.Log(idx)
+	idx =BinarySearch([]int{1,3,5,7,9},0)
+	t.Log(idx)
+	idx =BinarySearch([]int{1,3,5,7,9},2)
+	t.Log(idx)
+	idx =BinarySearch([]int{1,3,5,7},2)
+	t.Log(idx)
+}
