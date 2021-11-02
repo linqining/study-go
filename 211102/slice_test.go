@@ -28,3 +28,8 @@ func TestGetNDan(t *testing.T) {
 	t.Log(GetNDan(10))
 	t.Log(GetNDan(1000000000))
 }
+
+func TestMaxSubArr(t *testing.T) {
+	_,_,res := MaxSubArr([]int{-1,2,1,6,0,-1,9,4,3},false)
+	t.Log(res)
+}

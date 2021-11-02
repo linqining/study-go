@@ -147,3 +147,73 @@ func GetNDan(n int) string{
 	}
 	return step
 }
+
+//描述
+//一个数组有 N 个元素，求连续子数组的最大和。 例如：[-1,2,1]，和最大的连续子数组为[2,1]，其和为 3
+//输入描述：
+//输入为两行。 第一行一个整数n(1 <= n <= 100000)，表示一共有n个元素 第二行为n个数，即每个元素,每个整数都在32位int范围内。以空格分隔。
+//输出描述：
+//所有连续子数组中和最大的值。
+
+//func MaxSubArr(arr []int) int{
+//	max := arr[0]
+//	subMax := MaxSubArr(arr[1:])
+//	if subMax>0{
+//		if max <0{
+//			if subMax> max{
+//				return subMax
+//			}else{
+//				return max
+//			}
+//		}else{
+//			if subMax>0{
+//				return max + subMax
+//			}else{
+//				return max
+//			}
+//		}
+//	}
+//}
+
+// 返回开始结束索引
+func MaxSubArr(arr []int,inLeft bool) (int,int, int){
+	if len(arr)==1{
+		return 0,1,arr[0]
+	}
+	midIndex := len(arr)/2
+	leftStart,leftEnd,leftMax := MaxSubArr(arr[:midIndex],true)
+	rightStart,rightEnd,rightMax := MaxSubArr(arr[midIndex:],false)
+
+	fmt.Println("输入的数组",arr)
+	fmt.Println("左侧数据",leftStart,leftEnd,leftMax)
+	fmt.Println("右侧数据",rightStart+midIndex,rightEnd+midIndex,rightMax)
+
+	tmp := leftMax+rightMax
+	for i:=leftEnd+1;i<midIndex;i++{
+		tmp += arr[i]
+	}
+	for j:= 0;j<rightStart;j++{
+		tmp+=arr[midIndex+j]
+	}
+	fmt.Println("总值", tmp)
+	if (tmp>leftMax) &&(tmp>rightMax){
+		fmt.Println("返回值",leftStart,rightEnd+midIndex,tmp)
+		return leftStart,rightEnd+midIndex,tmp
+	}else{
+		if leftMax>rightMax{
+			fmt.Println("返回值",leftStart,leftEnd,leftMax)
+			return leftStart,leftEnd,leftMax
+		}else if leftMax<rightMax{
+			fmt.Println("返回值",rightStart+midIndex,rightEnd+midIndex,rightMax)
+			return rightStart+midIndex,rightEnd+midIndex,rightMax
+		}else{
+			if inLeft{
+				fmt.Println("返回值",leftStart,leftEnd,leftMax)
+				return leftStart,leftEnd,leftMax
+			}else{
+				fmt.Println("返回值",rightStart+midIndex,rightEnd+midIndex,rightMax)
+				return rightStart+midIndex,rightEnd+midIndex,rightMax
+			}
+		}
+	}
+}
