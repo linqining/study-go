@@ -217,3 +217,68 @@ func MaxSubArr(arr []int,inLeft bool) (int,int, int){
 		}
 	}
 }
+
+func MaxSubArr2(arr []int)int{
+	n := len(arr)
+	max:=arr[0]
+	sum:=arr[0]
+	for i:= 1; i < n; i++ {
+		num := arr[i]
+		if sum<0{
+			sum = num
+		}else{
+			sum += num
+		}
+		if sum>max{
+			max=sum
+		}
+	}
+	return max
+}
+
+
+//有一个长为 n 的数组 A ，求满足 0 ≤ a ≤ b < n 的 A[b] - A[a] 的最大值。
+//
+//给定数组 A 及它的大小 n ，请返回最大差值。
+//
+//数据范围：  ，数组中的值满足
+
+func Maxdiff(arr []int)int{
+	max :=arr[0]
+	min := arr[0]
+	diff := 0
+	for i:=0;i<len(arr);i++{
+		elm := arr[i]
+		if elm>max{
+			max = elm
+			if max>min{
+				if (max-min)>diff{
+					diff=max-min
+				}
+			}
+		}
+		if elm<min{
+			min = elm
+			max = elm
+		}
+	}
+	return diff
+}
+
+
+//在一组数的编码中，若任意两个相邻的代码只有一位二进制数不同， 则称这种编码为格雷码(Gray Code)，请编写一个函数，使用递归的方法生成N位的格雷码。
+//
+//给定一个整数n，请返回n位的格雷码，顺序为从0开始。
+
+func GrayCode(n int) []string{
+	if n==1{
+		return []string{"0","1"}
+	}
+	codeList := GrayCode(n-1)
+	ret := make([]string,2*len(codeList))
+	for i:=0;i<len(codeList);i++{
+		ret[i] = "0" + codeList[i]
+		ret[i+len(codeList)]= "1"+codeList[i]
+	}
+	return ret
+}

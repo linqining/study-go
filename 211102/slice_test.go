@@ -33,3 +33,24 @@ func TestMaxSubArr(t *testing.T) {
 	_,_,res := MaxSubArr([]int{-1,2,1,6,0,-1,9,4,3},false)
 	t.Log(res)
 }
+
+func TestMaxSubArr2(t *testing.T) {
+	res := MaxSubArr2([]int{-1,2,1,6,0,-1,9,4,3})
+	t.Log(res)
+}
+
+func TestMaxdiff(t *testing.T) {
+	res := Maxdiff([]int{5,1})
+	t.Log(res)
+	res = Maxdiff([]int{5,6})
+	t.Log(res)
+}
+
+func TestGrayCode(t *testing.T) {
+	res := GrayCode(1)
+	t.Log(res)
+	res = GrayCode(2)
+	t.Log(res)
+	res = GrayCode(3)
+	t.Log(res)
+}
