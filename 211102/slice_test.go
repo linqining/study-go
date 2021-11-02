@@ -20,3 +20,11 @@ func TestFindMiss(t *testing.T) {
 	count := FindMiss(arr)
 	t.Log(count)
 }
+
+func TestGetNDan(t *testing.T) {
+	t.Log(GetNDan(1))
+	t.Log(GetNDan(2))
+	t.Log(GetNDan(3))
+	t.Log(GetNDan(10))
+	t.Log(GetNDan(1000000000))
+}
