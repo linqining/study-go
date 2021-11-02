@@ -54,3 +54,14 @@ func TestGrayCode(t *testing.T) {
 	res = GrayCode(3)
 	t.Log(res)
 }
+
+func TestGetWonPrice(t *testing.T) {
+	wonmon:=GetWonPrice([]int{1,3,1,1,4})
+	t.Log(wonmon)
+
+	wonmon=GetWonPrice([]int{1,3,2,1,4})
+	t.Log(wonmon)
+
+	wonmon=GetWonPrice([]int{4,1,2})
+	t.Log(wonmon)
+}
