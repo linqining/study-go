@@ -108,9 +108,7 @@ func (bitmap *Bitmap) String() string {
 func FindMiss(numArr []int)int{
 	bm := &Bitmap{}
 	max := numArr[0]
-	if len(numArr) == max+1{
-		return 0
-	}
+
 	for _,item:=range numArr{
 		bm.Add(item)
 	}
