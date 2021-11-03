@@ -171,3 +171,15 @@ func (u *uset)getFriendCount(num int)int{
 	// 还要减去自己已经认识的
 	return count
 }
+
+func CountBitDiff( m int32, n int32) int{
+	res := m^n
+	count := 0
+	var mask int32 =1
+	for i:=0;i<31;i++{
+		if res & (mask<<i)>0{
+			count++
+		}
+	}
+	return count
+}

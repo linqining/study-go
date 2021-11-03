@@ -18,3 +18,8 @@ func TestJumpToX(t *testing.T) {
 func TestFindFriends(t *testing.T) {
 	FindFriends(10)
 }
+
+func TestCountBitDiff(t *testing.T) {
+	diffCount := CountBitDiff(1999,2299)
+	t.Log(diffCount)
+}
