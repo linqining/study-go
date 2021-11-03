@@ -35,3 +35,7 @@ func TestSerialMax(t *testing.T) {
 	score,_:=SerialMax(data)
 	t.Log(score)
 }
+
+func TestSumTree(t *testing.T) {
+	SumTree()
+}

@@ -307,3 +307,41 @@ func SerialMax(qList []QScore) (score int, lastq QScore){
 		return last2Score, last2p
 	}
 }
+
+
+type Node struct{
+	val int
+	left *Node
+	right *Node
+}
+
+func buildTree(nodes []int)*Node{
+	if len(nodes)==1{
+		return &Node{val:nodes[0]}
+	}
+	midVal := nodes[0]
+	mid := Node{val:midVal}
+	leftNodes := nodes[1:(len(nodes)+1)/2]
+	left := buildTree(leftNodes)
+	rightNodes := nodes[(len(nodes)+1)/2:]
+	right := buildTree(rightNodes)
+	mid.left=left
+	mid.right = right
+	return &mid
+}
+
+func SumTree(){
+	node := buildTree([]int{10,-2,8,-4,6,7,5})
+	sum,_:=node.Sum()
+	fmt.Println(sum)
+}
+
+func (n *Node)Sum() (sum int, origin int){
+	if n.left==nil && n.right==nil{
+		return 0, n.val
+	}
+	origin = n.val
+	leftSum, lOrigin := n.left.Sum()
+	rightSum,rOrigin := n.right.Sum()
+	return leftSum+rightSum+lOrigin+rOrigin,n.val
+}
