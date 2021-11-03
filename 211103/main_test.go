@@ -9,3 +9,12 @@ func TestGenBoard(t *testing.T) {
 func TestGetMostBonus(t *testing.T) {
 	GetMostBonus()
 }
+
+func TestJumpToX(t *testing.T) {
+	step := JumpToX(999)
+	t.Log(step)
+}
+
+func TestFindFriends(t *testing.T) {
+	FindFriends(10)
+}

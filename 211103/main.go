@@ -79,3 +79,95 @@ func GenBoard()[][]int{
 	return ret
 }
 
+func JumpToX(x int)int{
+	if x ==0{
+		return 0
+	}
+	if x ==1{
+		return 1
+	}
+	step :=0
+	if x%2 ==0{
+		prevStep := JumpToX(x/2)
+		step = 1 +prevStep
+	}else{
+		x = x-1
+		remainStep := JumpToX(x)
+		step = 1+ remainStep
+	}
+	return step
+}
+
+
+
+//小A参加了一个n人的活动，每个人都有一个唯一编号i(i>=0 & i<n)，其中m对相互认识，在活动中两个人可以通过互相都认识的一个人介绍认识。现在问活动结束后，小A最多会认识多少人？
+//
+//输入描述：
+//第一行聚会的人数：n（n>=3 & n<10000）；
+//第二行小A的编号: ai（ai >= 0 & ai < n)；
+//第三互相认识的数目: m（m>=1 & m
+//< n(n-1)/2）；
+//第4到m+3行为互相认识的对，以','分割的编号。
+//输出描述：
+//输出小A最多会新认识的多少人？
+
+type uset struct{
+	data []int
+}
+
+func FindFriends(personCount int){
+	unionSet := NewUset(10)
+	fmt.Println(unionSet)
+	unionSet.Union(1,0)
+	unionSet.Union(3,1)
+	unionSet.Union(4,1)
+	unionSet.Union(5,3)
+	unionSet.Union(6,1)
+	unionSet.Union(6,5)
+	for _,v :=range unionSet.data{
+		v := v
+		fmt.Println(v)
+	}
+	fmt.Println(unionSet.getFriendCount(5))
+}
+
+func NewUset(personCount int) *uset{
+	unionSet := uset{data:make([]int, personCount)}
+	for i,_ :=range unionSet.data{
+		unionSet.data[i] = i
+	}
+	return &unionSet
+}
+
+func (u *uset)Union(a int, b int){
+	if u.data[a]==u.data[b]{
+		return
+	}
+	// 已经有主，全部投靠a
+	if u.data[b]!=b{
+		bParent := u.data[b]
+		for i,v :=range u.data{
+			if v==bParent{
+				u.data[i] = u.data[a]
+			}
+		}
+	}else{
+		u.data[b] = u.data[a]
+	}
+}
+
+func (u *uset)getFriendCount(num int)int{
+	parent := u.data[num]
+	var count int
+	for _,v :=range u.data{
+		if v==parent{
+			count++
+		}
+	}
+	if count>0 && parent==num{
+		// 除去自己
+		count --
+	}
+	// 还要减去自己已经认识的
+	return count
+}
