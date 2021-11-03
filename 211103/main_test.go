@@ -23,3 +23,9 @@ func TestCountBitDiff(t *testing.T) {
 	diffCount := CountBitDiff(1999,2299)
 	t.Log(diffCount)
 }
+
+
+func TestRestaruantMaxIncome(t *testing.T) {
+	res :=RestaruantMaxIncome([]int{2,4,2},[][]int{[]int{1,3},[]int{3,5},[]int{3,7},[]int{5,9},[]int{1,10}})
+	t.Log(res)
+}

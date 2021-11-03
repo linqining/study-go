@@ -3,6 +3,7 @@ package _11103
 import (
 	"fmt"
 	"math/rand"
+	"sort"
 )
 
 type point struct{
@@ -182,4 +183,84 @@ func CountBitDiff( m int32, n int32) int{
 		}
 	}
 	return count
+}
+
+func RestaruantMaxIncome(tableCap []int, customerG [][]int) int {
+	if len(tableCap)==0 || len(customerG)==0{
+		return 0
+	}
+	tableIndex :=0
+	// 先把桌子按照容量排序
+	sort.Ints(tableCap)
+
+	sort.Slice(customerG,func(i int,j int) bool {
+		a := customerG[i]
+		b := customerG[j]
+		if a[0]<b[0]{
+			return true
+		}
+		return false
+	})
+	// 如果桌子坐不下人，把桌子扔掉
+	minCount := customerG[0][0]
+	fmt.Println(customerG)
+
+	for{
+		if tableCap[tableIndex]<minCount{
+			tableIndex++
+			if tableCap[tableIndex]>minCount{
+				break
+			}
+		}else{
+			break
+		}
+	}
+
+	// 一个坐得下的桌子都没有
+	if tableIndex == len(tableCap){
+		return 0
+	}
+	customerIndex := pickMostVC(customerG,tableCap[tableIndex])
+
+	currentIncome := customerG[customerIndex][1]
+
+	// 移除已安排座位的顾客
+	newCustomerG := [][]int{}
+	for i,v :=range customerG{
+		v := v
+		if i!=customerIndex{
+			newCustomerG = append(newCustomerG,v)
+		}
+	}
+	remainIncome := RestaruantMaxIncome(tableCap[tableIndex+1:],newCustomerG)
+
+	return currentIncome+remainIncome
+
+
+	// 逐个安排桌子如果一个桌子只能坐下一组人，那么就是唯一选项
+
+
+	//如果桌子较大，并且有多组可以分配的，那么选择金额大的
+
+	// 剩下的递归调用
+
+}
+
+func pickMostVC(customerGroup [][]int,tableCap int) int{
+	maxIndex := 0
+	maxVal:=0
+	for i,v :=range customerGroup{
+		if v[0]>tableCap{
+			return maxIndex
+		}
+		if v[0]<=tableCap {
+			if v[1]>maxVal{
+				maxVal = v[1]
+				maxIndex = i
+			}
+		}else{
+			return maxIndex
+		}
+	}
+	return maxIndex
 }
