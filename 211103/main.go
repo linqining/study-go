@@ -264,3 +264,30 @@ func pickMostVC(customerGroup [][]int,tableCap int) int{
 	}
 	return maxIndex
 }
+
+type QScore struct{
+	set int
+	val int
+}
+
+func SerialMax(qList []QScore) (score int, lastq QScore){
+	if len(qList)==1{
+		lastq = qList[0]
+		return lastq.val,lastq
+	}
+	lastq = qList[len(qList)-1]
+	last2Score, last2p := SerialMax(qList[:len(qList)-1])
+	var bonus,tmpScore int
+	if last2p.set == lastq.set{
+		bonus = 10
+		tmpScore = last2Score + lastq.val - bonus
+	}else{
+		tmpScore = last2Score + lastq.val
+	}
+
+	if tmpScore> last2Score{
+		return tmpScore,lastq
+	}else{
+		return last2Score, last2p
+	}
+}
