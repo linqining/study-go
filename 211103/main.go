@@ -270,6 +270,22 @@ type QScore struct{
 	val int
 }
 
+//描述
+//小M和大M要通过选择元素组成队列进行得分pk。目前存在队列S1,S2,S3...Sn,每个元素包括2个正整数属性set和value.从中选出任意K个元素S[i1],S[i2]...S[ik],保证顺序不变即i1 < i2 < i3< ... < ik,组成新的队列P1,P2,P3......Pk.我们通过一个机制评价队列的好坏:
+//
+//Base=P1.value+P2.value+...Pk.value,
+//
+//Bonus=10*t;t为新队列中Pi.set=P(i+1).set的i个数.
+//
+//最终得分Score=Base-Bonus;求Score的最大值和取最大值时新队列元素个数的最小值.
+//
+//输入描述：
+//第一行包含一个数N(0 < N <= 500)
+//
+//接下来N行每一行两个数表示S1,S2,...,Sn的set和value值 (0 < set,value <= 20)
+//输出描述：
+//Score的最大值和新队列元素个数的最小值
+
 func SerialMax(qList []QScore) (score int, lastq QScore){
 	if len(qList)==1{
 		lastq = qList[0]
